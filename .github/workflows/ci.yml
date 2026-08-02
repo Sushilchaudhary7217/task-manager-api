@@ -1,4 +1,5 @@
 name: CI Pipeline
+
 on:
   push:
     branches: [ main ]
@@ -14,21 +15,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # Step 2: Node.js setup karo
+      # Step 2: Node.js setup karo (Latest LTS use karte hain)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: '22' 
       
-      # Step 3: Dependencies install karo
+      # Step 3: pnpm install karo (Yeh step missing tha!)
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      # Step 4: Dependencies install karo
       - name: Install dependencies
         run: pnpm install
       
-      # Step 4: Build check karo
+      # Step 5: Build check karo
       - name: Build project
         run: pnpm build
       
-      # Step 5: Tests run karo
+      # Step 6: Tests run karo
       - name: Run tests
         run: pnpm test
