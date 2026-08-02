@@ -50,7 +50,8 @@ app.post('/tasks', (req: Request, res: Response) => {
 
 // ROUTE 3: PUT /tasks/:id - Task update karo
 app.put('/tasks/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
+  // FIX: 'as string' add kiya taaki TypeScript error na de
+  const id = parseInt(req.params.id as string);
   const task = tasks.find(t => t.id === id);
 
   if (!task) {
@@ -71,7 +72,8 @@ app.put('/tasks/:id', (req: Request, res: Response) => {
 
 // ROUTE 4: DELETE /tasks/:id - Task delete karo
 app.delete('/tasks/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id);
+  // FIX: Yahan bhi 'as string' add kiya
+  const id = parseInt(req.params.id as string);
   const taskIndex = tasks.findIndex(t => t.id === id);
 
   if (taskIndex === -1) {
