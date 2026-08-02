@@ -1,0 +1,34 @@
+name: CI Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Code checkout karo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Step 2: Node.js setup karo
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      
+      # Step 3: Dependencies install karo
+      - name: Install dependencies
+        run: pnpm install
+      
+      # Step 4: Build check karo
+      - name: Build project
+        run: pnpm build
+      
+      # Step 5: Tests run karo
+      - name: Run tests
+        run: pnpm test
