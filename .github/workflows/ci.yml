@@ -11,28 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Code checkout karo
+      # 1. Code layo
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      # Step 2: Node.js setup karo (Latest LTS use karte hain)
+      # 2. Node.js setup karo (Latest LTS: v22)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22' 
       
-      # Step 3: pnpm install karo (Yeh step missing tha!)
-      - name: Install pnpm
-        run: npm install -g pnpm
+      # 3. pnpm setup karo (Official Action - Sabse Safe)
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Ya jo bhi latest stable ho
       
-      # Step 4: Dependencies install karo
+      # 4. Ab dependencies install karo
       - name: Install dependencies
         run: pnpm install
       
-      # Step 5: Build check karo
+      # 5. Build check
       - name: Build project
         run: pnpm build
       
-      # Step 6: Tests run karo
+      # 6. Test run
       - name: Run tests
         run: pnpm test
